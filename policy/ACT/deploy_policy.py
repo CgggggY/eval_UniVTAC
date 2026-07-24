@@ -84,20 +84,26 @@ class Policy(BasePolicy):
         else:
             cam_high = camera_transform(observation["observation"][self.camera_type]["rgb"])
 
-        left_tac = tactile_transform(observation["tactile"]["left_gsmini"]["rgb_marker"])
-        right_tac = tactile_transform(observation["tactile"]["right_gsmini"]["rgb_marker"])
-        
         # Extract joint positions (8D: 7 arm + 1 gripper)
         qpos = observation["embodiment"]["joint"][:8]
 
         ret = {
             "cam_high": cam_high,
-            "tac_left": left_tac,
-            "tac_right": right_tac,
             "qpos": qpos.cpu().numpy()
         }
         if self.camera_type == 'all':
             ret["cam_wrist"] = cam_wrist
+
+        # Vision-only policies have no tactile inputs. For policies that do use
+        # tactile data, support both the current TacArena observation names and
+        # the legacy gsmini names used by older recordings.
+        if self.model.tactile_names:
+            tactile_obs = observation["tactile"]
+            left_key = "left_tactile" if "left_tactile" in tactile_obs else "left_gsmini"
+            right_key = "right_tactile" if "right_tactile" in tactile_obs else "right_gsmini"
+            ret["tac_left"] = tactile_transform(tactile_obs[left_key]["rgb_marker"])
+            ret["tac_right"] = tactile_transform(tactile_obs[right_key]["rgb_marker"])
+
         return ret
 
     def eval(self, task, observation):
