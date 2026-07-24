@@ -1,8 +1,9 @@
 # Insert Hole ACT 实验复现说明
 
 本说明对应 `experiment_manifest.yaml` 中记录的 Vision、Freeze 和 Finetune
-三组实验。原始 HDF5 数据和模型权重不进入普通 Git 历史；权重与测评视频见同名
-GitHub Release。
+三组实验。原始 HDF5 数据和模型权重不进入普通 Git 历史；原始数据保存在
+[ModelScope 数据集](https://modelscope.cn/datasets/CgggggY/Univtac_insert_hole_50)，
+权重与测评视频见同名 GitHub Release。
 
 ## 1. 环境
 
@@ -29,6 +30,21 @@ source /root/isaacsim/setup_conda_env.sh
 这些绝对路径是本次 FreeGPU 容器中的实际路径；在其他机器上应替换为对应安装位置。
 
 ## 2. 转换专家数据
+
+下载 50 条原始专家示范：
+
+```bash
+modelscope download \
+  --dataset CgggggY/Univtac_insert_hole_50 \
+  --local_dir /tmp/Univtac_insert_hole_50
+```
+
+将下载目录中的 `raw/insert_hole/demo` 放入仓库的
+`data/insert_hole/demo`。可以在源数据目录运行以下命令校验全部 114 个文件：
+
+```bash
+sha256sum -c SHA256SUMS
+```
 
 原始数据目录：
 

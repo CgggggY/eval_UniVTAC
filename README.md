@@ -133,9 +133,11 @@ qpos[t]   = 原始 embodiment/joint[t, 0:8]
 action[t] = 原始 embodiment/joint[t+1, 0:8]
 ```
 
-原始与转换数据合计约 15 GB，因此没有上传到普通 Git 仓库或本次 Release。
-如需完全从头复现，应另行取得专家 HDF5 数据，并按照
-[复现说明](./analysis/reproduce.md) 进行转换。
+原始与转换数据合计约 15 GB，因此没有写入普通 Git 仓库或模型 Release。其中
+50 条原始专家示范已经发布到
+[ModelScope：CgggggY/Univtac_insert_hole_50](https://modelscope.cn/datasets/CgggggY/Univtac_insert_hole_50)，
+包含原始 HDF5、成功示范视频、metadata、日志、场景状态和完整 SHA-256 清单。
+ACT 格式副本可以按照[复现说明](./analysis/reproduce.md)从原始数据重新生成。
 
 ## 6. 快速查看顺序
 

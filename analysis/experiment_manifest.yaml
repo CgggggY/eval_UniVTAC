@@ -25,8 +25,12 @@ data:
   converted_frames: 10078
   act_dataset: policy/ACT/data/sim-insert_hole/demo-50
   raw_dataset: data/insert_hole/demo/hdf5
+  raw_dataset_url: https://modelscope.cn/datasets/CgggggY/Univtac_insert_hole_50
+  raw_dataset_remote_path: raw/insert_hole/demo
+  raw_dataset_files: 114
+  raw_dataset_bytes: 7534901950
   dataset_stats_sha256: 4743cec9c75d0658a119fab02ab267e4ea98f150ea66c57368a3948d9f3d93b0
-  note: Large HDF5 files are intentionally not stored in Git.
+  note: Raw HDF5 files are stored on ModelScope; converted ACT HDF5 files are regenerated locally.
 
 training:
   seed: 0

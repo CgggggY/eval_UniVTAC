@@ -13,6 +13,8 @@
 - `generate_freeze_vs_finetune_stats.py`：Freeze/Finetune 统计生成脚本；
 - `artifacts/dataset_stats.pkl`：三组共同使用的归一化统计。
 
-大型 HDF5、模型 checkpoint 和完整视频没有进入 Git 历史。模型与视频通过
-`insert-hole-act-ablation-2026-07-24` Release 保存，HDF5 数据需存放在独立
-数据存储中。
+大型 HDF5、模型 checkpoint 和完整视频没有进入 Git 历史。模型与评测视频通过
+`insert-hole-act-ablation-2026-07-24` Release 保存；50 条原始专家 HDF5 与
+成功示范视频保存在
+[ModelScope 数据集](https://modelscope.cn/datasets/CgggggY/Univtac_insert_hole_50)。
+ACT 格式 HDF5 可由原始数据重新生成。
