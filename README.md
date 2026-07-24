@@ -3,6 +3,11 @@
 > UniVTAC: A Unified Simulation Platform for Visuo-Tactile Manipulation Data Generation, Learning, and Benchmarking<br>
 > [arXiv](https://arxiv.org/abs/2602.10093) | [PDF](https://arxiv.org/pdf/2602.10093) | [Website](https://univtac.github.io/) | [HuggingFace Dataset](https://huggingface.co/datasets/byml/UniVTAC) | [Modelscope Dataset](https://modelscope.cn/datasets/byml2024/UniVTAC)
 
+> **本 Fork 的 Insert Hole 实验归档：**我们基于原项目完成了 50 条专家示范的
+> ACT 数据转换，并训练、固定测评了 Vision、Vision + Tactile Freeze 和
+> Vision + Tactile Finetune 三组策略。新增内容、实验结果、模型下载与复现方法见
+> [EXPERIMENT_README.md](./EXPERIMENT_README.md)。
+
 **UniVTAC** is a tactile-aware simulation benchmark for robotic manipulation built on top of **NVIDIA Isaac Lab** and **TacEx (UIPC-based tactile simulation)**. It provides a unified framework for collecting expert demonstrations, training visuotactile policies, and evaluating them across a diverse suite of contact-rich manipulation tasks — all with high-fidelity tactile feedback from simulated GelSight Mini, ViTai GF225, or XenseWS sensors.
 
 ## Installation
