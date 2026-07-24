@@ -12,6 +12,8 @@ device: cuda:0
 ckpt_dir: null
 policy_class: ACT
 num_steps: 4000
+num_epochs: 6000
+state_dim: 8
 
 # Model training params
 batch_size: 64

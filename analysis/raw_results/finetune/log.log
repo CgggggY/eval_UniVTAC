@@ -1,0 +1,416 @@
+[2026-07-24 12:05:41] Task Name: insert_hole
+[2026-07-24 12:05:41] Task Config: /root/gpufree-data/univtac/projects/UniVTAC/task_config/demo.yml
+[2026-07-24 12:05:41] Eval Config: {
+    "policy_name": "ACT",
+    "seed": 0,
+    "ckpt_setting": 50,
+    "instruction_type": "seen",
+    "instuction_file": null,
+    "task_name": "insert_hole",
+    "task_config": "demo"
+}
+--------------------
+
+[2026-07-24 12:05:41] Task init finish in 34.10 seconds.
+[2026-07-24 12:05:41] Policy init finish in 1.28 seconds.
+[2026-07-24 12:06:59] [1  ] Seed 1000000 failed after 77.90 s.
+steps: 631  , actions: 203  .
+Instruction: Empty
+Total 0/1(0.00%) success.
+[2026-07-24 12:08:04] [2  ] Seed 1000001 failed after 64.42 s.
+steps: 595  , actions: 160  .
+Instruction: Empty
+Total 0/2(0.00%) success.
+[2026-07-24 12:09:06] [3  ] Seed 1000002 failed after 61.78 s.
+steps: 567  , actions: 150  .
+Instruction: Empty
+Total 0/3(0.00%) success.
+[2026-07-24 12:10:15] [4  ] Seed 1000003 failed after 69.48 s.
+steps: 636  , actions: 180  .
+Instruction: Empty
+Total 0/4(0.00%) success.
+[2026-07-24 12:11:31] [5  ] Seed 1000004 success after 76.08 s.
+steps: 662  , actions: 220  .
+Instruction: Empty
+Total 1/5(20.00%) success.
+[2026-07-24 12:12:51] [6  ] Seed 1000005 failed after 78.99 s.
+steps: 653  , actions: 237  .
+Instruction: Empty
+Total 1/6(16.67%) success.
+[2026-07-24 12:13:39] [7  ] Seed 1000006 failed after 48.12 s.
+steps: 497  , actions: 67   .
+Instruction: Empty
+Total 1/7(14.29%) success.
+[2026-07-24 12:14:38] [8  ] Seed 1000007 success after 59.42 s.
+steps: 588  , actions: 122  .
+Instruction: Empty
+Total 2/8(25.00%) success.
+[2026-07-24 12:15:43] [9  ] Seed 1000008 failed after 64.45 s.
+steps: 587  , actions: 153  .
+Instruction: Empty
+Total 2/9(22.22%) success.
+[2026-07-24 12:16:44] [10 ] Seed 1000009 failed after 60.78 s.
+steps: 538  , actions: 145  .
+Instruction: Empty
+Total 2/10(20.00%) success.
+[2026-07-24 12:17:52] [11 ] Seed 1000010 failed after 67.99 s.
+steps: 578  , actions: 187  .
+Instruction: Empty
+Total 2/11(18.18%) success.
+[2026-07-24 12:19:03] [12 ] Seed 1000011 failed after 71.46 s.
+steps: 610  , actions: 188  .
+Instruction: Empty
+Total 2/12(16.67%) success.
+[2026-07-24 12:20:03] [13 ] Seed 1000012 success after 59.46 s.
+steps: 584  , actions: 160  .
+Instruction: Empty
+Total 3/13(23.08%) success.
+[2026-07-24 12:21:06] [14 ] Seed 1000013 failed after 63.37 s.
+steps: 606  , actions: 198  .
+Instruction: Empty
+Total 3/14(21.43%) success.
+[2026-07-24 12:22:11] [15 ] Seed 1000014 failed after 64.61 s.
+steps: 621  , actions: 204  .
+Instruction: Empty
+Total 3/15(20.00%) success.
+[2026-07-24 12:23:17] [16 ] Seed 1000015 success after 65.99 s.
+steps: 650  , actions: 206  .
+Instruction: Empty
+Total 4/16(25.00%) success.
+[2026-07-24 12:24:16] [17 ] Seed 1000016 failed after 58.78 s.
+steps: 592  , actions: 164  .
+Instruction: Empty
+Total 4/17(23.53%) success.
+[2026-07-24 12:25:20] [18 ] Seed 1000017 failed after 63.74 s.
+steps: 627  , actions: 197  .
+Instruction: Empty
+Total 4/18(22.22%) success.
+[2026-07-24 12:26:27] [19 ] Seed 1000018 success after 67.23 s.
+steps: 626  , actions: 226  .
+Instruction: Empty
+Total 5/19(26.32%) success.
+[2026-07-24 12:27:36] [20 ] Seed 1000019 failed after 68.73 s.
+steps: 626  , actions: 231  .
+Instruction: Empty
+Total 5/20(25.00%) success.
+[2026-07-24 12:28:36] [21 ] Seed 1000020 failed after 59.39 s.
+steps: 586  , actions: 186  .
+Instruction: Empty
+Total 5/21(23.81%) success.
+[2026-07-24 12:29:36] [22 ] Seed 1000021 failed after 60.15 s.
+steps: 601  , actions: 186  .
+Instruction: Empty
+Total 5/22(22.73%) success.
+[2026-07-24 12:30:36] [23 ] Seed 1000022 failed after 60.26 s.
+steps: 594  , actions: 204  .
+Instruction: Empty
+Total 5/23(21.74%) success.
+[2026-07-24 12:31:30] [24 ] Seed 1000023 failed after 53.17 s.
+steps: 548  , actions: 163  .
+Instruction: Empty
+Total 5/24(20.83%) success.
+[2026-07-24 12:32:22] [25 ] Seed 1000024 failed after 51.99 s.
+steps: 555  , actions: 149  .
+Instruction: Empty
+Total 5/25(20.00%) success.
+[2026-07-24 12:33:13] [26 ] Seed 1000025 success after 51.20 s.
+steps: 572  , actions: 144  .
+Instruction: Empty
+Total 6/26(23.08%) success.
+[2026-07-24 12:34:19] [27 ] Seed 1000026 failed after 65.42 s.
+steps: 662  , actions: 226  .
+Instruction: Empty
+Total 6/27(22.22%) success.
+[2026-07-24 12:35:18] [28 ] Seed 1000027 failed after 59.21 s.
+steps: 608  , actions: 189  .
+Instruction: Empty
+Total 6/28(21.43%) success.
+[2026-07-24 12:36:26] [29 ] Seed 1000028 failed after 67.71 s.
+steps: 660  , actions: 255  .
+Instruction: Empty
+Total 6/29(20.69%) success.
+[2026-07-24 12:37:10] [30 ] Seed 1000029 success after 44.01 s.
+steps: 493  , actions: 102  .
+Instruction: Empty
+Total 7/30(23.33%) success.
+[2026-07-24 12:38:20] [31 ] Seed 1000030 failed after 69.99 s.
+steps: 653  , actions: 268  .
+Instruction: Empty
+Total 7/31(22.58%) success.
+[2026-07-24 12:39:22] [32 ] Seed 1000031 failed after 62.43 s.
+steps: 617  , actions: 216  .
+Instruction: Empty
+Total 7/32(21.88%) success.
+[2026-07-24 12:40:28] [33 ] Seed 1000032 success after 65.86 s.
+steps: 628  , actions: 239  .
+Instruction: Empty
+Total 8/33(24.24%) success.
+[2026-07-24 12:41:31] [34 ] Seed 1000033 failed after 62.42 s.
+steps: 618  , actions: 215  .
+Instruction: Empty
+Total 8/34(23.53%) success.
+[2026-07-24 12:42:30] [35 ] Seed 1000034 failed after 59.36 s.
+steps: 642  , actions: 192  .
+Instruction: Empty
+Total 8/35(22.86%) success.
+[2026-07-24 12:43:33] [36 ] Seed 1000035 failed after 62.32 s.
+steps: 634  , actions: 205  .
+Instruction: Empty
+Total 8/36(22.22%) success.
+[2026-07-24 12:44:34] [37 ] Seed 1000036 success after 61.28 s.
+steps: 611  , actions: 211  .
+Instruction: Empty
+Total 9/37(24.32%) success.
+[2026-07-24 12:45:28] [38 ] Seed 1000037 failed after 53.29 s.
+steps: 552  , actions: 165  .
+Instruction: Empty
+Total 9/38(23.68%) success.
+[2026-07-24 12:46:26] [39 ] Seed 1000038 failed after 58.76 s.
+steps: 605  , actions: 189  .
+Instruction: Empty
+Total 9/39(23.08%) success.
+[2026-07-24 12:47:23] [40 ] Seed 1000039 failed after 56.49 s.
+steps: 613  , actions: 165  .
+Instruction: Empty
+Total 9/40(22.50%) success.
+[2026-07-24 12:48:13] [41 ] Seed 1000040 success after 49.89 s.
+steps: 548  , actions: 137  .
+Instruction: Empty
+Total 10/41(24.39%) success.
+[2026-07-24 12:49:04] [42 ] Seed 1000041 success after 50.81 s.
+steps: 543  , actions: 148  .
+Instruction: Empty
+Total 11/42(26.19%) success.
+[2026-07-24 12:50:07] [43 ] Seed 1000042 failed after 63.21 s.
+steps: 624  , actions: 224  .
+Instruction: Empty
+Total 11/43(25.58%) success.
+[2026-07-24 12:51:17] [44 ] Seed 1000043 failed after 69.23 s.
+steps: 653  , actions: 257  .
+Instruction: Empty
+Total 11/44(25.00%) success.
+[2026-07-24 12:52:17] [45 ] Seed 1000044 failed after 60.58 s.
+steps: 607  , actions: 206  .
+Instruction: Empty
+Total 11/45(24.44%) success.
+[2026-07-24 12:53:10] [46 ] Seed 1000045 success after 52.97 s.
+steps: 555  , actions: 159  .
+Instruction: Empty
+Total 12/46(26.09%) success.
+[2026-07-24 12:54:18] [47 ] Seed 1000046 failed after 67.58 s.
+steps: 630  , actions: 261  .
+Instruction: Empty
+Total 12/47(25.53%) success.
+[2026-07-24 12:55:25] [48 ] Seed 1000047 failed after 66.60 s.
+steps: 635  , actions: 256  .
+Instruction: Empty
+Total 12/48(25.00%) success.
+[2026-07-24 12:56:24] [49 ] Seed 1000048 failed after 59.67 s.
+steps: 597  , actions: 195  .
+Instruction: Empty
+Total 12/49(24.49%) success.
+[2026-07-24 12:57:23] [50 ] Seed 1000049 failed after 58.82 s.
+steps: 612  , actions: 187  .
+Instruction: Empty
+Total 12/50(24.00%) success.
+[2026-07-24 12:58:21] [51 ] Seed 1000050 failed after 57.69 s.
+steps: 614  , actions: 185  .
+Instruction: Empty
+Total 12/51(23.53%) success.
+[2026-07-24 12:59:19] [52 ] Seed 1000051 failed after 57.29 s.
+steps: 590  , actions: 178  .
+Instruction: Empty
+Total 12/52(23.08%) success.
+[2026-07-24 13:00:28] [53 ] Seed 1000052 failed after 69.15 s.
+steps: 692  , actions: 254  .
+Instruction: Empty
+Total 12/53(22.64%) success.
+[2026-07-24 13:01:34] [54 ] Seed 1000053 failed after 65.86 s.
+steps: 629  , actions: 238  .
+Instruction: Empty
+Total 12/54(22.22%) success.
+[2026-07-24 13:02:29] [55 ] Seed 1000054 failed after 54.68 s.
+steps: 547  , actions: 175  .
+Instruction: Empty
+Total 12/55(21.82%) success.
+[2026-07-24 13:03:20] [56 ] Seed 1000055 success after 51.61 s.
+steps: 544  , actions: 154  .
+Instruction: Empty
+Total 13/56(23.21%) success.
+[2026-07-24 13:04:20] [57 ] Seed 1000056 success after 60.03 s.
+steps: 617  , actions: 195  .
+Instruction: Empty
+Total 14/57(24.56%) success.
+[2026-07-24 13:05:19] [58 ] Seed 1000057 failed after 58.43 s.
+steps: 586  , actions: 192  .
+Instruction: Empty
+Total 14/58(24.14%) success.
+[2026-07-24 13:06:14] [59 ] Seed 1000058 failed after 55.36 s.
+steps: 578  , actions: 162  .
+Instruction: Empty
+Total 14/59(23.73%) success.
+[2026-07-24 13:07:10] [60 ] Seed 1000059 success after 55.62 s.
+steps: 577  , actions: 172  .
+Instruction: Empty
+Total 15/60(25.00%) success.
+[2026-07-24 13:08:09] [61 ] Seed 1000060 failed after 58.94 s.
+steps: 586  , actions: 191  .
+Instruction: Empty
+Total 15/61(24.59%) success.
+[2026-07-24 13:09:06] [62 ] Seed 1000061 failed after 56.32 s.
+steps: 598  , actions: 163  .
+Instruction: Empty
+Total 15/62(24.19%) success.
+[2026-07-24 13:10:04] [63 ] Seed 1000062 failed after 58.25 s.
+steps: 607  , actions: 174  .
+Instruction: Empty
+Total 15/63(23.81%) success.
+[2026-07-24 13:11:03] [64 ] Seed 1000063 failed after 58.95 s.
+steps: 616  , actions: 186  .
+Instruction: Empty
+Total 15/64(23.44%) success.
+[2026-07-24 13:12:07] [65 ] Seed 1000064 failed after 63.99 s.
+steps: 626  , actions: 211  .
+Instruction: Empty
+Total 15/65(23.08%) success.
+[2026-07-24 13:13:22] [66 ] Seed 1000065 failed after 74.48 s.
+steps: 691  , actions: 300  .
+Instruction: Empty
+Total 15/66(22.73%) success.
+[2026-07-24 13:14:13] [67 ] Seed 1000066 success after 50.74 s.
+steps: 541  , actions: 150  .
+Instruction: Empty
+Total 16/67(23.88%) success.
+[2026-07-24 13:15:07] [68 ] Seed 1000067 failed after 54.34 s.
+steps: 565  , actions: 162  .
+Instruction: Empty
+Total 16/68(23.53%) success.
+[2026-07-24 13:16:10] [69 ] Seed 1000068 failed after 63.16 s.
+steps: 634  , actions: 214  .
+Instruction: Empty
+Total 16/69(23.19%) success.
+[2026-07-24 13:17:19] [70 ] Seed 1000069 failed after 68.64 s.
+steps: 649  , actions: 253  .
+Instruction: Empty
+Total 16/70(22.86%) success.
+[2026-07-24 13:18:29] [71 ] Seed 1000070 success after 69.57 s.
+steps: 649  , actions: 253  .
+Instruction: Empty
+Total 17/71(23.94%) success.
+[2026-07-24 13:19:30] [72 ] Seed 1000071 success after 61.46 s.
+steps: 629  , actions: 206  .
+Instruction: Empty
+Total 18/72(25.00%) success.
+[2026-07-24 13:20:39] [73 ] Seed 1000072 success after 68.58 s.
+steps: 666  , actions: 250  .
+Instruction: Empty
+Total 19/73(26.03%) success.
+[2026-07-24 13:21:38] [74 ] Seed 1000073 failed after 58.56 s.
+steps: 603  , actions: 186  .
+Instruction: Empty
+Total 19/74(25.68%) success.
+[2026-07-24 13:22:43] [75 ] Seed 1000074 failed after 65.37 s.
+steps: 633  , actions: 232  .
+Instruction: Empty
+Total 19/75(25.33%) success.
+[2026-07-24 13:23:51] [76 ] Seed 1000075 failed after 68.05 s.
+steps: 686  , actions: 238  .
+Instruction: Empty
+Total 19/76(25.00%) success.
+[2026-07-24 13:25:03] [77 ] Seed 1000076 failed after 71.79 s.
+steps: 684  , actions: 263  .
+Instruction: Empty
+Total 19/77(24.68%) success.
+[2026-07-24 13:25:56] [78 ] Seed 1000077 failed after 52.83 s.
+steps: 545  , actions: 149  .
+Instruction: Empty
+Total 19/78(24.36%) success.
+[2026-07-24 13:27:04] [79 ] Seed 1000078 failed after 67.35 s.
+steps: 642  , actions: 250  .
+Instruction: Empty
+Total 19/79(24.05%) success.
+[2026-07-24 13:27:57] [80 ] Seed 1000079 success after 53.31 s.
+steps: 550  , actions: 156  .
+Instruction: Empty
+Total 20/80(25.00%) success.
+[2026-07-24 13:29:02] [81 ] Seed 1000080 failed after 64.56 s.
+steps: 612  , actions: 232  .
+Instruction: Empty
+Total 20/81(24.69%) success.
+[2026-07-24 13:30:00] [82 ] Seed 1000081 failed after 58.47 s.
+steps: 593  , actions: 187  .
+Instruction: Empty
+Total 20/82(24.39%) success.
+[2026-07-24 13:30:57] [83 ] Seed 1000082 failed after 56.87 s.
+steps: 592  , actions: 181  .
+Instruction: Empty
+Total 20/83(24.10%) success.
+[2026-07-24 13:31:57] [84 ] Seed 1000083 success after 59.93 s.
+steps: 621  , actions: 194  .
+Instruction: Empty
+Total 21/84(25.00%) success.
+[2026-07-24 13:33:02] [85 ] Seed 1000084 failed after 64.32 s.
+steps: 640  , actions: 217  .
+Instruction: Empty
+Total 21/85(24.71%) success.
+[2026-07-24 13:33:56] [86 ] Seed 1000085 failed after 53.78 s.
+steps: 561  , actions: 157  .
+Instruction: Empty
+Total 21/86(24.42%) success.
+[2026-07-24 13:34:58] [87 ] Seed 1000086 success after 62.11 s.
+steps: 589  , actions: 217  .
+Instruction: Empty
+Total 22/87(25.29%) success.
+[2026-07-24 13:35:55] [88 ] Seed 1000087 success after 56.73 s.
+steps: 566  , actions: 174  .
+Instruction: Empty
+Total 23/88(26.14%) success.
+[2026-07-24 13:36:52] [89 ] Seed 1000088 failed after 57.36 s.
+steps: 607  , actions: 181  .
+Instruction: Empty
+Total 23/89(25.84%) success.
+[2026-07-24 13:37:56] [90 ] Seed 1000089 success after 64.01 s.
+steps: 612  , actions: 223  .
+Instruction: Empty
+Total 24/90(26.67%) success.
+[2026-07-24 13:38:54] [91 ] Seed 1000090 failed after 57.94 s.
+steps: 573  , actions: 188  .
+Instruction: Empty
+Total 24/91(26.37%) success.
+[2026-07-24 13:39:54] [92 ] Seed 1000091 failed after 59.24 s.
+steps: 592  , actions: 196  .
+Instruction: Empty
+Total 24/92(26.09%) success.
+[2026-07-24 13:40:53] [93 ] Seed 1000092 failed after 59.46 s.
+steps: 604  , actions: 186  .
+Instruction: Empty
+Total 24/93(25.81%) success.
+[2026-07-24 13:41:47] [94 ] Seed 1000093 success after 53.85 s.
+steps: 579  , actions: 163  .
+Instruction: Empty
+Total 25/94(26.60%) success.
+[2026-07-24 13:42:46] [95 ] Seed 1000094 failed after 59.29 s.
+steps: 614  , actions: 194  .
+Instruction: Empty
+Total 25/95(26.32%) success.
+[2026-07-24 13:43:58] [96 ] Seed 1000095 success after 70.98 s.
+steps: 676  , actions: 264  .
+Instruction: Empty
+Total 26/96(27.08%) success.
+[2026-07-24 13:44:51] [97 ] Seed 1000096 failed after 53.79 s.
+steps: 541  , actions: 157  .
+Instruction: Empty
+Total 26/97(26.80%) success.
+[2026-07-24 13:45:56] [98 ] Seed 1000097 success after 64.59 s.
+steps: 637  , actions: 225  .
+Instruction: Empty
+Total 27/98(27.55%) success.
+[2026-07-24 13:47:03] [99 ] Seed 1000098 failed after 66.66 s.
+steps: 671  , actions: 236  .
+Instruction: Empty
+Total 27/99(27.27%) success.
+[2026-07-24 13:48:20] [100] Seed 1000099 failed after 77.26 s.
+steps: 671  , actions: 244  .
+Instruction: Empty
+Total 27/100(27.00%) success.
+[2026-07-24 13:48:20] Final Result: 27/100(27.00%) success.

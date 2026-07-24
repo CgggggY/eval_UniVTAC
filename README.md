@@ -1,90 +1,171 @@
-<h1 align="center">UniVTAC</h1>
+# UniVTAC Insert Hole 复现与视触觉消融实验
 
-> UniVTAC: A Unified Simulation Platform for Visuo-Tactile Manipulation Data Generation, Learning, and Benchmarking<br>
-> [arXiv](https://arxiv.org/abs/2602.10093) | [PDF](https://arxiv.org/pdf/2602.10093) | [Website](https://univtac.github.io/) | [HuggingFace Dataset](https://huggingface.co/datasets/byml/UniVTAC) | [Modelscope Dataset](https://modelscope.cn/datasets/byml2024/UniVTAC)
+本 Fork 基于原始 [univtac/UniVTAC](https://github.com/univtac/UniVTAC) 仓库，
+完成了 `insert_hole` 任务的数据转换、ACT 策略训练、固定 100 Episode 测评以及
+Vision/触觉消融分析。原项目主体、任务定义和第三方依赖均保持不变；本文件主要
+说明本 Fork 相比上游仓库增加或修改了什么，以及如何找到本次实验产物。
 
-**UniVTAC** is a tactile-aware simulation benchmark for robotic manipulation built on top of **NVIDIA Isaac Lab** and **TacEx (UIPC-based tactile simulation)**. It provides a unified framework for collecting expert demonstrations, training visuotactile policies, and evaluating them across a diverse suite of contact-rich manipulation tasks — all with high-fidelity tactile feedback from simulated GelSight Mini, ViTai GF225, or XenseWS sensors.
+## 1. 我们做了什么
 
-## Installation
+实验流程如下：
 
-Clone the repository and run the installation script `scripts/install.sh` to set up the environment and install dependencies all at once. The script will create a conda environment named `UniVTAC` and install Isaac Sim, Isaac Lab, TacEx, cuRobo, and other necessary packages.
+1. 在 FreeGPU 容器中配置 Isaac Sim、Isaac Lab、TacEx/UIPC 与 cuRobo 环境；
+2. 使用 `insert_hole/demo` 的 50 条成功专家示范；
+3. 将原始 HDF5 转换为 ACT 使用的状态—动作和视触觉图像格式；
+4. 使用相同数据、训练 seed `0`、ACT 主干和 4000 个训练 step 训练三组策略；
+5. 使用固定 seed `1000000–1000099`，分别完成 100 个闭环 Episode 测评；
+6. 对逐 seed 成功关系、失败条件、插入深度、姿态、相对滑动和动作阶段进行统计；
+7. 将代码改动、配置、结果、模型、视频与复现命令归档到 GitHub。
+
+三组实验设置与结果：
+
+| 组别 | 输入 | 触觉编码器 | 成功率 |
+|---|---|---|---:|
+| Vision | 第三视角相机 | 不使用 | 28/100 |
+| Freeze | 视觉 + 左右触觉 | 加载预训练权重并冻结 | 28/100 |
+| Finetune | 视觉 + 左右触觉 | 加载预训练权重并以 `1e-5` 微调 | 27/100 |
+
+三组总体成功率接近，但成功 seed 并不完全相同。主要失败条件集中在插入深度不足
+与物体相对夹爪滑动；详细原因、逐 seed 配对结果和进一步改进方向见
+[完整实验报告](./analysis/task_report.md)。
+
+## 2. 相比原始仓库修改了什么
+
+### 2.1 ACT 部署兼容修复
+
+修改文件：
+
+```text
+policy/ACT/deploy_policy.py
+```
+
+原实现会无条件读取旧命名的 `left_gsmini/right_gsmini` 触觉观测，导致
+Vision-only 策略出现 `KeyError: left_gsmini`。本 Fork 的修改包括：
+
+- Vision-only 模型不再读取不需要的触觉输入；
+- 触觉模型支持当前的 `left_tactile/right_tactile` 名称；
+- 同时保留对旧 `left_gsmini/right_gsmini` 名称的兼容。
+
+### 2.2 训练配置补全
+
+修改文件：
+
+```text
+policy/ACT/train_config.yml
+policy/ACT/train_config_freeze.yml
+policy/ACT/train_config_vision.yml
+```
+
+补充了当前 DETR/ACT 参数解析器要求的 `num_epochs` 和 `state_dim`，避免启动训练时
+出现缺少 `--num_epochs` 或 `--state_dim` 的参数错误。此前出现的
+`--policy_class` 缺失则来自未正确读取训练配置文件，而不是这两个字段本身。
+
+### 2.3 新增实验配置
+
+新增文件：
+
+```text
+policy/ACT/train_config_freeze_verified.yml
+policy/ACT/deploy_vision.yml
+policy/ACT/deploy_freeze.yml
+policy/ACT/deploy_finetune.yml
+policy/ACT/SIM_TASK_CONFIGS.json
+```
+
+这些文件分别固定了 Vision、Freeze、Finetune 的训练/部署名称，以及转换后的
+50-Episode ACT 数据集目录、相机名称和轨迹长度设置。
+
+## 3. 新增的实验归档
+
+所有轻量实验记录保存在 [`analysis/`](./analysis/)：
+
+| 路径 | 内容 |
+|---|---|
+| [`task_report.md`](./analysis/task_report.md) | 完整实验设置、结果、原因分析与改进建议 |
+| [`experiment_manifest.yaml`](./analysis/experiment_manifest.yaml) | 代码版本、环境、配置、结果和模型 SHA-256 |
+| [`reproduce.md`](./analysis/reproduce.md) | 数据转换、三组训练与固定评测命令 |
+| [`raw_results/`](./analysis/raw_results/) | 三组正式测评的 metadata、精简日志和场景描述 |
+| [`figures/`](./analysis/figures/) | 三组训练 loss、L1 和 KL 曲线 |
+| `*_comparison.md` | Vision/Freeze 与 Freeze/Finetune 的统计比较 |
+| `*_per_episode.csv` | 固定 100 seeds 的逐条配对结果 |
+| [`generate_freeze_vs_finetune_stats.py`](./analysis/generate_freeze_vs_finetune_stats.py) | 可重新生成统计结果的脚本 |
+| [`dataset_stats.pkl`](./analysis/artifacts/dataset_stats.pkl) | 三组共同使用的 ACT 归一化统计 |
+
+## 4. 模型与视频下载
+
+模型权重和完整评测视频体积较大，没有写入普通 Git 历史，而是保存在
+[GitHub Release：insert-hole-act-ablation-2026-07-24](https://github.com/CgggggY/eval_UniVTAC/releases/tag/insert-hole-act-ablation-2026-07-24)。
+
+Release 包含：
+
+```text
+vision_policy_last.ckpt
+freeze_policy_last.ckpt
+finetune_policy_last.ckpt
+tactile_encoder_best.pth
+final_eval_videos.tar.gz
+SHA256SUMS
+```
+
+三份 `policy_last.ckpt` 是正式 100-Episode 测评实际加载的模型。视频压缩包包含
+Vision、Freeze、Finetune 三个目录，共 300 条视频。
+
+下载后可验证文件完整性：
 
 ```bash
-git clone https://github.com/univtac/UniVTAC.git
-cd UniVTAC
-bash scripts/install.sh
+sha256sum -c SHA256SUMS
 ```
 
-See the [Installation Guide](./docs/Installation.md) for detailed setup instructions, including installing the environment, installing TacEx from the modified local source and setting up cuRobo for motion planning.
+## 5. 数据说明
 
-## Task Gallery
+本次实验涉及两类 HDF5：
 
-UniVTAC currently includes the following manipulation tasks, all featuring tactile sensing:
-
-| Task | Module | Description |
-|---|---|---|
-| **Collect** | `collect` | Collect contact-rich tactile data for pretraining |
-| **Lift Bottle** | `lift_bottle` | Grasp and lift a bottle off a surface near a wall |
-| **Lift Can** | `lift_can` | Grasp and lift a cylindrical can |
-| **Insert HDMI** | `insert_HDMI` | Insert an HDMI connector into a port |
-| **Insert Hole** | `insert_hole` | Precision peg-in-hole insertion |
-| **Insert Tube** | `insert_tube` | Insert a tube into a fixture |
-| **Pull Out Key** | `pull_out_key` | Extract a key from a lock |
-| **Put Bottle in Shelf** | `put_bottle_in_shelf` | Place a bottle onto a shelf |
-| **Grasp & Classify** | `grasp_classify` | Grasp an object and classify it by tactile feedback |
-
-To build more tasks, refer to the [Task Creation Guide](./docs/TaskCreation.md) for instructions on how to define new manipulation tasks within the UniVTAC framework.
-
-## Data Collection
-
-See the [Data Collection Guide](./docs/Collection.md) for instructions on how to run the automated data collection pipeline, configure task-specific parameters, and understand the output data structure.
-
-Dataset containing 100 episodes per task can be downloaded from [HuggingFace](https://huggingface.co/datasets/byml/UniVTAC), [Modelscope](https://modelscope.cn/datasets/byml2024/UniVTAC) or by running the script in `data/download.sh`.
-
-## Train & Eval Policies
-
-UniVTAC includes several baseline policies implemented under the `policy/` directory:
-
-- ACT: Action Chunking with Transformers with/without tactile inputs
-- Abation: ACT ablation variants for modality comparison
-- ViTAL: ACT with CLIP-pretrained tactile-vision encoders in ViTAL
-
-Each policy is a self-contained module under `policy/` with its own data processing, training, and deployment scripts. All policies share a unified evaluation entry point at the project root:
-
-```bash
-bash eval_policy.sh ${task_name} ${task_config} ${policy_config} ${gpu_id}
+```text
+data/insert_hole/demo/hdf5/*.hdf5
+policy/ACT/data/sim-insert_hole/demo-50/episode_*.hdf5
 ```
 
-For parallel evaluation over many seeds:
+第一类是信息完整的原始专家示范；第二类是由
+`policy/ACT/process_data.py` 转换得到的 ACT 训练数据。转换后每个时间步使用：
 
-```bash
-bash parallel_eval.sh ${task_name} ${task_config} ${policy_config} ${gpu_id} [num_processes] [total_num]
+```text
+qpos[t]   = 原始 embodiment/joint[t, 0:8]
+action[t] = 原始 embodiment/joint[t+1, 0:8]
 ```
 
-The evaluation results, including videos and success rate logs, will be saved in the `eval_result/` directory under the project root.
+原始与转换数据合计约 15 GB，因此没有写入普通 Git 仓库或模型 Release。其中
+50 条原始专家示范已经发布到
+[ModelScope：CgggggY/Univtac_insert_hole_50](https://modelscope.cn/datasets/CgggggY/Univtac_insert_hole_50)，
+包含原始 HDF5、成功示范视频、metadata、日志、场景状态和完整 SHA-256 清单。
+ACT 格式副本可以按照[复现说明](./analysis/reproduce.md)从原始数据重新生成。
 
-To deploy your own policy, refer to the [Deploy Your Policy](./docs/Deploy.md).
+## 6. 快速查看顺序
 
-## TODO
+首次查看本 Fork 时，建议依次阅读：
 
-- Data collection and evaluation are now only supported on the GelSight Mini sensor. We will add support for ViTai GF225 and XenseWS in the near future.
+1. 本文件：了解相对上游的变化；
+2. [`analysis/task_report.md`](./analysis/task_report.md)：了解实验结论；
+3. [`analysis/experiment_manifest.yaml`](./analysis/experiment_manifest.yaml)：确认版本和哈希；
+4. [`analysis/reproduce.md`](./analysis/reproduce.md)：重新运行实验；
+5. GitHub Release：下载实际评测模型与视频。
 
-## 👍 Citations
-If you find our work useful, please consider citing:
+## 7. 主要结论
 
-```
-@article{chen2026univtac,
-  title={UniVTAC: A Unified Simulation Platform for Visuo-Tactile Manipulation Data Generation, Learning, and Benchmarking},
-  author={Chen, Baijun and Wan, Weijie and Chen, Tianxing and Guo, Xianda and Xu, Congsheng and Qi, Yuanyang and Zhang, Haojie and Wu, Longyan and Xu, Tianling and Li, Zixuan and others},
-  journal={arXiv preprint arXiv:2602.10093},
-  year={2026}
-}
-```
+当前结果没有观察到触觉输入带来稳定的总体成功率提升，也没有观察到微调触觉编码器
+优于冻结编码器。不过，这不代表触觉完全无效：三组完成的 seed 集合存在明显差异，
+触觉策略也改变了部分旋转条件下的行为表现。现阶段更可能的瓶颈包括：
 
-## 🏷️ License
-This repository is released under the MIT license. See [LICENSE](./LICENSE) for additional details.
+- 50 条示范不足以覆盖接触后的纠偏行为；
+- 专家数据中的夹爪动作几乎不变，缺少主动抗滑监督；
+- ACT 长动作块与时间聚合可能削弱即时触觉反馈；
+- 全局触觉特征可能丢失插入所需的局部接触和剪切信息；
+- 单次训练 seed 和 100 个 Episode 仍不足以证明 1–5 个百分点的小差异。
 
-## Contact
-<div style="text-align: center;">
-  <img src="https://box.nju.edu.cn/seafhttp/f/fc1021a908ff49309f22/?op=view" alt="Wechat Group" width="300"/>
-</div>
+后续可优先探索多训练 seed、触觉遮挡/噪声测试、接触阶段短 chunk、触觉时序特征、
+主动夹持纠偏示范以及更大规模的数据实验。
+
+## 8. 上游项目
+
+本 Fork 的基础平台、论文、安装方法与任务定义来自 UniVTAC。通用平台说明仍以
+[上游仓库](https://github.com/univtac/UniVTAC) 和本仓库原始
+[`UPSTREAM_README.md`](./UPSTREAM_README.md) 为准。

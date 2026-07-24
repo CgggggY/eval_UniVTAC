@@ -1,0 +1,93 @@
+experiment:
+  name: insert-hole-act-vision-tactile-ablation
+  completed_at: "2026-07-24"
+  task: insert_hole
+  task_config: demo
+  policy: ACT
+  objective: Compare Vision, pretrained tactile encoder Freeze, and pretrained tactile encoder Finetune.
+
+source:
+  univtac_repository: https://github.com/univtac/UniVTAC
+  univtac_commit: 05bcd3edb92237107efa40105292a24f1a9fd761
+  isaaclab_repository: https://github.com/isaac-sim/IsaacLab
+  isaaclab_commit: 858234d06e6845d75420d2558e236526282e5da6
+
+environment:
+  gpu: NVIDIA L40
+  gpu_memory_mib: 46068
+  driver: 580.126.09
+  python: 3.10.20
+  pytorch: 2.5.1+cu124
+  pytorch_cuda: "12.4"
+
+data:
+  successful_expert_episodes: 50
+  converted_frames: 10078
+  act_dataset: policy/ACT/data/sim-insert_hole/demo-50
+  raw_dataset: data/insert_hole/demo/hdf5
+  raw_dataset_url: https://modelscope.cn/datasets/CgggggY/Univtac_insert_hole_50
+  raw_dataset_remote_path: raw/insert_hole/demo
+  raw_dataset_files: 114
+  raw_dataset_bytes: 7534901950
+  dataset_stats_sha256: 4743cec9c75d0658a119fab02ab267e4ea98f150ea66c57368a3948d9f3d93b0
+  note: Raw HDF5 files are stored on ModelScope; converted ACT HDF5 files are regenerated locally.
+
+training:
+  seed: 0
+  steps: 4000
+  batch_size: 64
+  chunk_size: 50
+  temporal_aggregation: true
+  camera_names:
+    - cam_high
+  variants:
+    vision:
+      config: policy/ACT/train_config_vision.yml
+      tactile_names: []
+    freeze:
+      config: policy/ACT/train_config_freeze_verified.yml
+      tactile_names: [tac_left, tac_right]
+      tactile_backbone_lr: 0.0
+    finetune:
+      config: policy/ACT/train_config.yml
+      tactile_names: [tac_left, tac_right]
+      tactile_backbone_lr: 0.00001
+
+tactile_pretraining:
+  checkpoint: encoder/checkpoints/resnet18/20251128-125750/best.pth
+  sha256: 28097c91a1a1d051f65266fc7fdd84420dc184da9dcfc2006aa40af144cf15bf
+
+evaluation:
+  episodes_per_variant: 100
+  first_seed: 1000000
+  last_seed: 1000099
+  checkpoint_name: policy_last.ckpt
+  variants:
+    vision:
+      success: 28
+      total: 100
+      config: policy/ACT/deploy_vision.yml
+      raw_result: analysis/raw_results/vision
+      checkpoint_sha256: 404f2cf1583a2b54bd32ca5cf0819e48a2e458cc9249b94bd707e2216c08ae78
+    freeze:
+      success: 28
+      total: 100
+      config: policy/ACT/deploy_freeze.yml
+      raw_result: analysis/raw_results/freeze
+      checkpoint_sha256: 9d4f0bf42045d76b09ed02156247abbc96048130cd775f3360f84631f5765b2f
+    finetune:
+      success: 27
+      total: 100
+      config: policy/ACT/deploy_finetune.yml
+      raw_result: analysis/raw_results/finetune
+      checkpoint_sha256: 955779fc0005586fe11797ccc962350bacb14e8fc690e0ea497d18d3d561f83d
+
+release:
+  tag: insert-hole-act-ablation-2026-07-24
+  expected_assets:
+    - vision_policy_last.ckpt
+    - freeze_policy_last.ckpt
+    - finetune_policy_last.ckpt
+    - tactile_encoder_best.pth
+    - final_eval_videos.tar.gz
+    - SHA256SUMS
